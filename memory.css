@@ -26,7 +26,7 @@
 
 .rugzijde {
     cursor: pointer;  /* cursor instellen voor tegels die kunnen omgedraaid worden */
-    background: url(images/science/ugent.png) !important;
+    background: url(logo.png) !important;
     background-size: cover !important;
     background-repeat: no-repeat;
     background-position: 5% 5%;
