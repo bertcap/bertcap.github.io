@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <title>memory &mdash; Ghent University, Faculty of Sciences</title>
+
+        <!-- jQuery JS -->
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+        <!-- memory game CSS -->
+        <link rel="stylesheet" href="memory.css">
+
+        <!-- memory game JS -->
+        <script src="memory.js"></script>
+
+    </head>
+    <body>
+
+        <!-- kaart voor spelletje Memory -->
+        <div class="card spelbord">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title">Memory</h3>
+            </div>
+            <div class="card-body" id="spelbord"></div>
+            <div class="card-footer">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">rijen</span>
+                    </div>
+                    <input type="number" id="input-rows" value="4" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">kolommen</span>
+                    </div>
+                    <input type="number" id="input-cols" value="6" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-primary" id="btn-reset">Opnieuw</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- dialoogvenster voor spelletje Memory -->
+        <div class="modal" tabindex="-1" role="dialog" id="dialoogvenster">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            // lijst van afbeeldingen
+            const afbeeldingen = (
+                '1,2,3,4,5,6,7,IMG_4000,IMG_4001,IMG_4002,IMG_4003,IMG_4004,IMG_4005,IMG_4006,IMG_4007,IMG_4008,IMG_4009,IMG_4010,IMG_4011,IMG_4012,IMG_4013,IMG_4014,IMG_4015,IMG_4016,IMG_4017,IMG_4018,IMG_4023,IMG_4024,IMG_4025,IMG_4026,IMG_4027,IMG_4029,IMG_4030,IMG_4032,IMG_4034,IMG_4036,IMG_4038,IMG_4039,IMG_4040,IMG_4041,IMG_4042,IMG_4043,IMG_4044,IMG_4045,IMG_4046,IMG_4047,IMG_4048,IMG_4049,IMG_4050,IMG_4051,IMG_4052,IMG_4053,IMG_4054,IMG_4055,IMG_4056,IMG_4057,IMG_4059,IMG_4061,IMG_4062,IMG_4063,IMG_4064,IMG_4065,IMG_4066,IMG_4067,IMG_4068,IMG_4069,IMG_4070,IMG_4071,IMG_4072,IMG_4073,IMG_4074,IMG_4075,IMG_4076,IMG_4077,IMG_4079,IMG_4080,IMG_4081,IMG_4082,IMG_4083,IMG_4084,IMG_4085,IMG_4086,IMG_4087'
+            );
+
+            // koppel het element met het spelbord aan een werkend memory-spel
+            // met het opgegeven aantal rijen en kolommen, en met een opgegeven
+            // lijst van afbeeldingen waaruit de beeldzijde van de tegels wordt
+            // gekozen
+            const spelbord = new Memory({
+                selector: '#spelbord',
+                rijen: $("#input-rows").val(),
+                kolommen: $("#input-cols").val(),
+                afbeeldingen: afbeeldingen,
+                dialoogvenster: "#dialoogvenster"
+            });
+
+            $("#btn-reset").click(() => {
+                spelbord.grootte(
+                    $("#input-rows").val(),
+                    $("#input-cols").val()
+                );
+                spelbord.start();
+            });
+
+        </script>
+    </body>
+</html>
